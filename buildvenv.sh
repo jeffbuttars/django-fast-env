@@ -3,7 +3,7 @@
 venvname='venv'
 venvopts='--no-site-packages'
 
-djangoproj='grappellibase'
+djangoproj='djangoboiler'
 
 # Install a virutalvenv
 virtualenv $venvopts $venvname
