@@ -68,13 +68,13 @@ STATIC_ROOT = os.path.join(SITE_ROOT, 'staticfiles')
 if DEBUG:
 	STATIC_URL = '/static/'
 else:
-	STATIC_URL = "http://static.brockmansrifles.com"
+	STATIC_URL = "http://static.mydomain.com/"
 STATIC_URL = '/static/'
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = '/static/admin/'
+ADMIN_MEDIA_PREFIX = '%sadmin/' % (STATIC_URL)
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -129,6 +129,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'south',
+    'exampleapp',
 )
 if 'grappelli' in INSTALLED_APPS:
 	ADMIN_MEDIA_PREFIX = '/static/grappelli/'
