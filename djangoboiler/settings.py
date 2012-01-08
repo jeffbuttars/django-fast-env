@@ -69,7 +69,6 @@ if DEBUG:
 	STATIC_URL = '/static/'
 else:
 	STATIC_URL = "http://static.mydomain.com/"
-STATIC_URL = '/static/'
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
