@@ -21,16 +21,21 @@ VENV_NAME='venv'
 test -d $GU_LOGDIR || mkdir -p $GU_LOGDIR
 touch $GU_LOGFILE
 
-if [[ ! -d $VENV_NAME ]]; then
-	# Install a virutalvenv
-	test -f $VENV_NAME || virtualenv $VENV_OPTIONS $VENV_NAME
-	. $VENV_NAME/bin/activate
+function buildenv() 
+{
+	if [[ ! -d $VENV_NAME ]]; then
+		# Install a virutalvenv
+		test -f $VENV_NAME || virtualenv $VENV_OPTIONS $VENV_NAME
+		. $VENV_NAME/bin/activate
 
-	# If there are requirements, install them.
-	if [[ -f "$TOP_DIR/requirements.txt" ]]; then
-		pip install $(cat $TOP_DIR/requirements.txt)
+		# If there are requirements, install them.
+		if [[ -f "$TOP_DIR/requirements.txt" ]]; then
+			if [[ -f "$TOP_DIR/$DJANGO_PROJ.pybundle"  ]]; then
+				pip install $DJANGO_PROJ.pybundle
+			fi
+			pip install $(cat $TOP_DIR/requirements.txt)
+		fi
 	fi
-else
-	. $VENV_NAME/bin/activate
-fi
 
+	. $VENV_NAME/bin/activate
+} #buildenv()

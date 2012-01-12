@@ -4,9 +4,11 @@
 THIS_DIR=$(readlink -f $(dirname $BASH_SOURCE))
 source $THIS_DIR/../.settings.sh
 
+buildenv
+
 # This should be moved into a different script
 # if [[ -d /etc/nginx/conf.d ]]; then
-# 	sudo ln -vnsf $PWD/nginx/bmans.conf /etc/nginx/conf.d/
+# 	sudo ln -vnsf $PWD/nginx/$DJANGO_PROJ.conf /etc/nginx/conf.d/
 # 	sudo systemctl restart nginx.service
 # fi
 

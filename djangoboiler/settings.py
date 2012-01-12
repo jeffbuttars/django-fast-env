@@ -1,4 +1,3 @@
-# Django settings for brockmans project.
 
 import os
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
@@ -8,7 +7,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-		# ('Jeff Buttars', 'jeffbuttars@gmail.com'),
+		# ('Your Name', 'your.name@emailprovider.com'),
 		)
 
 MANAGERS = ADMINS
@@ -108,7 +107,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-#ROOT_URLCONF = 'brockmans.urls'
 ROOT_URLCONF = '%s.urls' % (os.path.basename(SITE_ROOT))
 
 TEMPLATE_DIRS = (
@@ -131,7 +129,7 @@ INSTALLED_APPS = (
     'exampleapp',
 )
 if 'grappelli' in INSTALLED_APPS:
-	ADMIN_MEDIA_PREFIX = '/static/grappelli/'
+	ADMIN_MEDIA_PREFIX = '%sgrappelli/' % (STATIC_URL)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

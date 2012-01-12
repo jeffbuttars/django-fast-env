@@ -7,8 +7,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'brockmans.views.home', name='home'),
-    # url(r'^brockmans/', include('brockmans.foo.urls')),
+    # url(r'^$', 'yourproject.views.home', name='home'),
+    # url(r'^yourproject/', include('yourproject.foo.urls')),
 
 
     # Uncomment the admin/doc line below to enable admin documentation:
@@ -20,4 +20,3 @@ urlpatterns = patterns('',
 	url(r'^grappelli/', include('grappelli.urls')),
 )
 urlpatterns += staticfiles_urlpatterns()
-
