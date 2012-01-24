@@ -10,16 +10,19 @@ else
 	buildenv
 fi
 
-. $TOP_DIR/$VENV_NAME/bin/activate
+vactivate
+#. $TOP_DIR/$VENV_NAME/bin/activate
 
 cd $DJANGO_PROJ
-python ./manage.py syncdb
 
 # python ./manage.py schemamigration grappelli --initial 
 # python ./manage.py migrate grappelli
-# 
-# python ./manage.py schemamigration exampleapp --initial 
-# python ./manage.py migrate exampleapp
+# python ./manage.py schemamigration core --initial 
+# python ./manage.py migrate core
 
-python ./manage.py collectstatic -l
+python ./manage.py syncdb
+
+# python ./manage.py migrate
+
+python ./manage.py collectstatic -l --noinput
 cd -

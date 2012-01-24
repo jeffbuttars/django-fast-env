@@ -5,37 +5,43 @@ TOP_DIR=$(readlink -f $(dirname $BASH_SOURCE))
 # Django Project name and subdir name
 DJANGO_PROJ='djangoboiler'
 
-# Gunicorn settings
-GU_LOGDIR="$TOP_DIR/logs/gunicorn"
-GU_LOGFILE="$GU_LOGDIR/$DJANGO_PROJ.log"
-GU_PORT=8000
-GU_LOG_LEVEL='debug'
-GU_NUM_WORKERS=4
-GU_USER=$USER
-GU_GROUP=$USER
+# Gunicorn settings file
+GU_SETTINGS_FILE="$TOP_DIR/$DJANGO_PROJ/gunicorn.py"
+
 
 # Name of the virtualenv
 VENV_OPTIONS='--no-site-packages'
 VENV_NAME='venv'
 
-test -d $GU_LOGDIR || mkdir -p $GU_LOGDIR
-touch $GU_LOGFILE
+function vactivate() 
+{
+	echo "Activating virtualenv $VENV_NAME"
+	cd $TOP_DIR
+	. "$VENV_NAME/bin/activate"
+	cd -
+} #vactivate()
 
 function buildenv() 
 {
-	if [[ ! -d $VENV_NAME ]]; then
+	echo "Building and Activating virtualenv $VENV_NAME, then starting the Django project."
+
+	oldir=$PWD
+	cd $TOP_DIR
+
+	if [[ ! -d "$VENV_NAME" ]]; then
 		# Install a virutalvenv
-		test -f $VENV_NAME || virtualenv $VENV_OPTIONS $VENV_NAME
-		. $VENV_NAME/bin/activate
+		test -d "$VENV_NAME" || virtualenv $VENV_OPTIONS $VENV_NAME;
 
 		# If there are requirements, install them.
-		if [[ -f "$TOP_DIR/requirements.txt" ]]; then
-			if [[ -f "$TOP_DIR/$DJANGO_PROJ.pybundle"  ]]; then
-				pip install $DJANGO_PROJ.pybundle
+		if [[ -f "./requirements.txt" ]]; then
+			vactivate
+			if [[ -f "$DJANGO_PROJ.pybundle"  ]]; then
+				pip install "$DJANGO_PROJ.pybundle"
 			fi
-			pip install $(cat $TOP_DIR/requirements.txt)
+			pip install $(cat ./requirements.txt)
 		fi
 	fi
 
-	. $VENV_NAME/bin/activate
+	cd $oldir 
 } #buildenv()
+
