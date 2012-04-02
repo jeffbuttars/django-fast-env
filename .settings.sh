@@ -3,7 +3,7 @@
 TOP_DIR=$(readlink -f $(dirname $BASH_SOURCE))
 
 # Django Project name and subdir name
-DJANGO_PROJ='djangoboiler'
+DJANGO_PROJ='project_rename_me'
 
 # Gunicorn settings file
 GU_SETTINGS_FILE="$TOP_DIR/$DJANGO_PROJ/gunicorn.py"
