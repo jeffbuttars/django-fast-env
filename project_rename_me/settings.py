@@ -1,10 +1,37 @@
+import os, sys
 
-import os
+# Find out what the full path of the directory this
+# settings file is in. This is the first step to making
+# this settings file portable by having it automatically 
+# adapt to it's location on the file system
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
+# By default we'll assume a production environment,
+# which means no DEBUG by default. Here we check the 
+# shell environment to to see if the DJANGO_JBC_DEV
+# variable is set. If it is, we turn on debugging.
+#
+# For instance, on your development machine you probably
+# want it to be debug mode by default. In that case, add this
+# to your ~/.bashrc file(without the quotes):
+# 'export DJANGO_JBC_DEV=yes'
+DEBUG = False
+if 'DJANGO_JBC_DEV' in os.environ:
+    DEBUG = True
 
-DEBUG = True
+# Override the environment and explicity set DEBUG
+# here if you wish to do that
+# DEBUG = True
+
+# We set up TEMPLATE_DEBUG to be the same as the DEBUG
+# value.
 TEMPLATE_DEBUG = DEBUG
+
+# Set the root domain name for the project.
+# this will act as the default domain for certain setings.
+DOMAIN_NAME = 'example.com'
+if DOMAIN_NAME == 'example.com':
+    raise Exception("You need set the DOMAIN_NAME variable in your settings.py")
 
 ADMINS = (
 		# ('Your Name', 'your.name@emailprovider.com'),
@@ -67,7 +94,8 @@ STATIC_ROOT = os.path.join(SITE_ROOT, 'staticfiles')
 if DEBUG:
 	STATIC_URL = '/static/'
 else:
-	STATIC_URL = "http://static.mydomain.com/"
+    STATIC_URL = "http://static.%s/" % (DOMAIN_NAME,)
+	# STATIC_URL = "http://static.mydomain.com/"
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
@@ -122,12 +150,15 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'grappelli',
+    # Uncomment the next line to use the grappelli admin interface
+    # 'grappelli',
     'django.contrib.admin',
     'django.contrib.admindocs',
-    'south',
     'exampleapp',
 )
+
+# if grappelli is installed, adjust the admin prefix
+# to use grappelli correctly
 if 'grappelli' in INSTALLED_APPS:
 	ADMIN_MEDIA_PREFIX = '%sgrappelli/' % (STATIC_URL)
 
