@@ -16,6 +16,6 @@ cd $TOP_DIR
 echo "creating new requirements.txt file"
 pip freeze > requirements.txt
 cat requirements.txt
-pip bundle $DJANGO_PROJ.pybundle $(cat $TOP_DIR/requirements.txt)
+pip bundle $PROJ_NAME.pybundle $(cat $TOP_DIR/requirements.txt)
 
 cd -

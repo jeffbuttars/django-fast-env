@@ -1,5 +1,5 @@
-# Django Boiler
-A fast way to get Django up and running with Gunicorn.
+# Django Fast Env(ironment) 
+A fast way to get Django up and running with Gunicorn in a virtualenv.
 
 ## Scripts to help you out
 
