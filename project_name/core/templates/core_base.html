@@ -82,6 +82,7 @@
 
                     {% if user.is_anonymous %}
                     <form action="{% url 'django.contrib.auth.views.login' %}" method="POST"
+                                  
                         class="navbar-form navbar-right" accept-charset="utf-8"> {% csrf_token %}
                         <div class="form-group">
                             {# {{ login_form.username.label_tag }} #}

@@ -3,6 +3,7 @@ from django.db import models
 
 
 class UserAccount(AbstractUser):
+    pass
     # account = models.ForeignKey('Account', blank=True, null=True)
 
     # class Meta():
