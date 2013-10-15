@@ -23,8 +23,8 @@
             {{ BOOTSTRAP3_CSS|safe }}
             {{ BOOTSTRAP3_THEME_CSS|safe }}
             <!-- {# <link rel="shortcut icon" href="/img/favicon.ico" /> #} -->
-            <!-- <link rel="stylesheet" href="{{STATIC_URL}}css/sticky-footer-navbar.css" type="text/css"/> -->
-            <!-- <link rel="stylesheet" href="{{STATIC_URL}}css/base.css" type="text/css"/> -->
+            <link rel="stylesheet" href="{{STATIC_URL}}css/sticky-footer-navbar.css" type="text/css"/>
+            <link rel="stylesheet" href="{{STATIC_URL}}css/core_base.css" type="text/css"/>
         {% endblock %}{# page_style_links #}
 
         {% block page_js_links %}
@@ -98,8 +98,8 @@
                         <input type="hidden" name="next" value="{{ next }}" />
                     </form>
                     {% else %}
-                    <div class="navbar-right">
-                        <a href="/logout/" class="btn btn-success">Logout</a>
+                    <div id="logout-button" class="navbar-right pull-right">
+                        <a href="/logout/" class="btn btn-warning">Logout <strong>{{user}}</strong></a>
                     </div>
                     {% include "bootstrap_theme_dropdown.html" %}
                     {% endif %}
