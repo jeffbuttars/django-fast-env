@@ -10,3 +10,4 @@ psycopg2
 autopep8
 django-admin-bootstrapped
 dj-database-url
+docutils

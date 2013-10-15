@@ -1,0 +1,36 @@
+{% extends "admin/base.html" %}
+{% load i18n %}{% load admin_static bootstrapped_goodies_tags %}{% load url from future %}
+
+{% block title %}{% render_with_template_if_exist cl.opts.app_label|lower|add:"/admin_app_name.html" cl.opts.app_label|default:"Django administration" %} | {% trans 'Django site admin' %}{% endblock %}
+
+{% block branding %}
+<a class="brand" href="{% url 'admin:index' %}">{% trans 'Project Brand' %}</a>
+
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li{% if request.path == "/" %} class="active"{% endif %}
+                        ><a href="/" class="nice-tooltip"
+                            data-toggle="tooltip" title data-original-title="Head to Home Page">Home</a></li>
+
+                    <li{% if request.path == "/account/user/" %} class="active"{% endif %}
+                     ><a href="/account/user/" class="nice-tooltip"
+                         data-toggle="tooltip"
+                         title="Add an Item" >Item</a></li>
+                    </ul>
+
+
+                    <div style="display: inline-block;" class="pull-right">
+                        <ul class="nav pull-right">
+
+                        {% comment %}
+                            
+                        {% if not user.is_anonymous %}
+                        {% include "extra_menu.html" %}
+                        {% endif %}
+                        {% endcomment %}
+
+                        </ul>
+                    </div>
+
+                </div><!--/.nav-collapse -->
+{% endblock %}
