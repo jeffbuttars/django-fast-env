@@ -1,6 +1,11 @@
-Django==1.3.1
-South==0.7.3
-django-annoying==0.7.6
-django-grappelli==2.3.5
-gunicorn==0.13.4
-wsgiref==0.1.2
+Django
+South
+django-annoying
+gunicorn
+wsgiref
+tornado
+usethis-django-bootstrap
+psycopg2
+autopep8
+django-admin-bootstrapped
+dj-database-url
