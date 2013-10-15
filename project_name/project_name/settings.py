@@ -213,7 +213,8 @@ BOOTSTRAP_SETTINGS = {
     'theme': 'default',
 }
 
-# AUTH_USER_MODEL = 'userapp.CustomUser'
+
+AUTH_USER_MODEL = 'core.UserAccount'
 
 
 INSTALLED_APPS = (
@@ -224,8 +225,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'gunicorn',
-    # 'south',
-    # 'south_admin',
+    'south',
+    'south_admin',
     'django_admin_bootstrapped',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
@@ -233,6 +234,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'jquery',
     'usethis_bootstrap',
+    'core',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

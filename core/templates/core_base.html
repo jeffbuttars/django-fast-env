@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+    {% block page_head %}
+
+        {% block page_meta %}
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="Jeff Buttars">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="" >
+        {% endblock %}{# page_meta #}
+
+        {% block page_fonts %}
+        {# <link href='http://fonts.googleapis.com/css?family=Michroma|Racing+Sans+One|Nunito:400,700,300|Oxygen:400,700,300' rel='stylesheet' type='text/css'> #}
+        {% endblock %}{# page_fonts #}
+
+        <title>{% block page_title %}Project Title{% endblock %}</title>
+
+        {% block page_style_links %}
+            {{ BOOTSTRAP3_CSS|safe }}
+            {{ BOOTSTRAP3_THEME_CSS|safe }}
+            <!-- {# <link rel="shortcut icon" href="/img/favicon.ico" /> #} -->
+            <!-- <link rel="stylesheet" href="{{STATIC_URL}}css/sticky-footer-navbar.css" type="text/css"/> -->
+            <!-- <link rel="stylesheet" href="{{STATIC_URL}}css/base.css" type="text/css"/> -->
+        {% endblock %}{# page_style_links #}
+
+        {% block page_js_links %}
+        {% endblock %}{# page_js_links #}
+
+        <style>
+        {% block page_style %}
+        {% endblock %}{# page_style #}
+        </style>
+
+        <script type="text/javascript" charset="utf-8">
+        {% block page_js %}
+        {% endblock %}{# page_js #}
+        </script>
+
+    {% endblock %}{# page_head #}
+    </head>
+    <body>
+    <div id="wrap">
+        {% block page_body %}
+        {% block page_body_container %}
+        <div class="container">
+        {% block page_body_navbar %}
+        <div class="navbar navbar-default" role="navigation">
+
+        {# The nice collapsed expand button for smaller screens. #}
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" href="/">Project Name</a>
+        </div>
+            <div class="navbar-collapse collapse  navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    {% if not user.is_anonymous %}
+                    <li>
+                        <a href="/user/{{user.id}}"> Welcome {{ user }} </a>
+                    </li>
+                    {% endif %}
+
+                {% block page_body_navbar_items %}
+                    <li{% if request.path == "/" %} class="active"{% endif %}>
+                        <a href="/">Home</a>
+                    </li>
+                    <li{% if request.path == "/" %} class="active"{% endif %}>
+                        <a href="/">Item 1</a>
+                    </li>
+                {% endblock %}{# page_body_navbar_items #}
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right top-navbar-right">
+
+                    {% if user.is_anonymous %}
+                    <form action="{% url 'django.contrib.auth.views.login' %}" method="POST"
+                        class="navbar-form navbar-right" accept-charset="utf-8"> {% csrf_token %}
+                        <div class="form-group">
+                            {# {{ login_form.username.label_tag }} #}
+                            {{ login_form.username }}
+                        </div>
+                        <div class="form-group">
+                            {# {{ login_form.password.label_tag }} #}
+                            {{ login_form.password }}
+                        </div>
+                        <button class="btn btn-success">
+                            Sign In
+                        </button>
+                        <input type="hidden" name="next" value="{{ next }}" />
+                    </form>
+                    {% else %}
+                    <div class="navbar-right">
+                        <a href="/logout/" class="btn btn-success">Logout</a>
+                    </div>
+                    {% include "bootstrap_theme_dropdown.html" %}
+                    {% endif %}
+                </ul>
+
+            </div><!--/.navbar-collapse -->
+        </div> {# Top most nav #}
+        {% endblock %} {# page_body_navbar #}
+
+            {% block message_bar %}
+            {% if messages %}
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered" >
+                        {# <caption>Messages</caption> #}
+                        {% for msg in messages %}
+                        <tr {%if msg.tags %}class="{{ msg.tags }}"{% endif %}>
+                            <td>{{ msg }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>  
+                </div>
+            </div>
+            {% endif %}
+            {% endblock %}
+
+            {% block page_body_container_inner %}
+            {% endblock %}{# page_body_container_inner #}
+
+        </div> <!-- /container -->
+    </div> <!-- #wrap -->
+    <div id="footer">
+        <div class="container">
+        {% block page_footer %}
+            <p> &copy; Copyright <strong>Project</strong> 2013
+            </p>
+        {% endblock %} {# page_footer #}
+        </div>
+    </div>
+
+        {% endblock %}{# page_body_container #}
+        {% endblock %} {# page_body #}
+
+        {% block page_bottom_js_links %}
+            {{ JQUERY_TAG|safe}}
+            {{ BOOTSTRAP3_JS|safe }}
+        {% endblock %}{# page_bottom_js_links #}
+
+        <script type="text/javascript" charset="utf-8">
+        {% block page_bottom_js %}
+        $("[rel='tooltip']").tooltip({'delay': 400});
+        {% endblock %}{# page_bottom_js #}
+        </script>
+    </body>
+</html>
+

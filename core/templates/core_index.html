@@ -1,0 +1,30 @@
+{% extends "core_base.djml" %}
+
+{% block page_style_links %}
+    {{ block.super }}
+    {% comment %}
+    <link rel="stylesheet"
+        href="{{STATIC_URL}}css/core/index.css"
+        type="text/css" media="all" />
+    <link rel="stylesheet"
+        href="{{STATIC_URL}}css/news/news.css"
+        type="text/css" media="all" />
+    {% endcomment %}
+{% endblock %}{# page_style_links #}
+
+{% block page_body_container_inner %}
+<div class="row">
+    <div class="col-md-8">
+        <h1>A Nice Header</h1>
+        <p>
+        Some more text here.
+        </p>
+        <p>
+            <a href="/" class="btn btn-success btn-lg">Join Now</a>
+            <a href="/" class="btn btn-primary btn-lg">Learn more »</a>
+        </p>
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
+{% endblock %}
