@@ -1,19 +1,24 @@
-# Django settings for project_name project.
+"""
+Django settings for project_name project.
+
+For more information on this file, see
+https://docs.djangoproject.com/en/1.6/topics/settings/
+
+For the full list of settings and their values, see
+https://docs.djangoproject.com/en/1.6/ref/settings/
+"""
 
 import os
 import sys
+from django.conf import global_settings
 
 PROJECT_NAME = 'project_name'
 
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Are we in a test run?
 IN_TESTING = 'test' in sys.argv
-
-# Find out what the full path of the directory this
-# settings file is in. This is the first step to making
-# this settings file portable by having it automatically
-# adapt to it's location on the file system
-SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
 # Project version for tracking state of the project
 # "YYYYMMDDpp" pp == pathc number for multiple versions
@@ -85,6 +90,31 @@ SERVER_EMAIL = os.getenv('DJANGO_EMAIL_SEND_FROM', EMAIL_HOST_USER)
 
 MANAGERS = ADMINS
 
+# Application definition
+
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'gunicorn',
+    'south',
+    'south_admin',
+    'core',
+    'django_admin_bootstrapped',
+    # Uncomment the next line to enable the admin:
+    'django.contrib.admin',
+    # Uncomment the next line to enable admin documentation:
+    'django.contrib.admindocs',
+    'jquery',
+    'usethis_bootstrap',
+)
+
+
+# Database
+# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+
 DATABASES = {
     'default': {
         'ENGINE': os.getenv('DJANGO_DB_ENGINE',
@@ -113,6 +143,9 @@ LANGUAGE_CODE = 'en-us'
 
 SITE_ID = 1
 
+
+# Internationalization
+# https://docs.djangoproject.com/en/1.6/topics/i18n/
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
@@ -139,8 +172,8 @@ MEDIA_URL = ''
 # Example: "/var/www/example.com/static/"
 STATIC_ROOT = ''
 
-# URL prefix for static files.
-# Example: "http://example.com/static/", "http://static.example.com/"
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.6/howto/static-files/
 STATIC_URL = '/static/'
 if DEBUG:
     STATIC_URL = '/static/'
@@ -163,13 +196,12 @@ ADMIN_MEDIA_PREFIX = '%sadmin/' % (STATIC_URL)
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #  'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'kg&4)vfbe_6gs&y*cz_xtq7(cxj83@&7rzo7$wea6rwc4!fh2@'
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'z5&v+f5d+#ew$^b8nr&r%m43uwg$*pz0kl0-2cxzg&nx78r42p'
 
-from django.conf import global_settings
 # List of callables that know how to import templates from various sources.
 # By default, we wrapp all loaders in the cached loader. This is a
 # production scenario, and it's fast!
@@ -189,6 +221,8 @@ TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
 )
 
 
+MIDDLEWARE_CLASSES = global_settings.MIDDLEWARE_CLASSES
+
 # MIDDLEWARE_CLASSES = (
 #     'sslify.middleware.SSLifyMiddleware',
 # ) + global_settings.MIDDLEWARE_CLASSES
@@ -206,36 +240,16 @@ WSGI_APPLICATION = PROJECT_NAME + '.wsgi.application'
 
 LOGIN_REDIRECT_URL = "/"
 
-JQUERY_VER = '2.0.3'
+JQUERY_VER = '2.1.0'
 BOOTSTRAP_SETTINGS = {
     'use_cdn': False,
-    # 'themes_dir': os.path.join(SITE_ROOT, 'bootstrap', 'static', 'themes'),
+    # 'themes_dir': os.path.join(BASE_DIR, 'bootstrap', 'static', 'themes'),
     'theme': 'default',
 }
 
 
 AUTH_USER_MODEL = 'core.UserAccount'
 
-
-INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'gunicorn',
-    'south',
-    'south_admin',
-    'core',
-    'django_admin_bootstrapped',
-    # Uncomment the next line to enable the admin:
-    'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    'django.contrib.admindocs',
-    'jquery',
-    'usethis_bootstrap',
-)
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 

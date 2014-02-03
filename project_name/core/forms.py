@@ -10,7 +10,8 @@ from django.forms.widgets import TextInput
 A bootstrapped version of the login form
 """
 
-class BSAuthenticationForm(AuthenticationForm):
+
+class BaseAuthenticationForm(AuthenticationForm):
     username = forms.CharField(
         widget=TextInput(attrs={
             'placeholder': 'Username',
@@ -29,5 +30,4 @@ class BSAuthenticationForm(AuthenticationForm):
                    }),
         label=_("Password"),
     )
-#BSAuthenticationForm
-
+#BaseAuthenticationForm

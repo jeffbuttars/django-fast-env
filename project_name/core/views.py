@@ -1,14 +1,25 @@
 from django.views.generic.base import View
 from django.utils.decorators import method_decorator
 from annoying.decorators import render_to
-from core.forms import BSAuthenticationForm
+from core.forms import BaseAuthenticationForm
 
 
 class CoreView(View):
 
     """Docstring for CoreView """
 
-    def get(self, req):
+    def base_data(self):
+        """todo: Docstring for base_data
+        :return:
+        :rtype:
+        """
+
+        return {
+            'login_form': BSAuthenticationForm,
+        }.copy()
+    #base_data()
+
+    def get(self, req, data={}):
         """todo: Docstring for get
 
         :param req: arg description
@@ -17,14 +28,16 @@ class CoreView(View):
         :rtype:
         """
 
-        return {
-            'login_form': BSAuthenticationForm,
-        }
+        d = self.base_data()
+        if data:
+            d.update(data)
+
+        return d
     # get()
 # CoreView
 
 
-class index(CoreView):
+class Index(CoreView):
 
     @method_decorator(render_to("core_index.html"))
     def get(self, req):
@@ -35,6 +48,6 @@ class index(CoreView):
         :return:
         :rtype:
         """
-        return super(index, self).get(req)
+        return super(Index, self).get(req)
     #get()
-#index
+#Index
