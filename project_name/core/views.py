@@ -15,7 +15,7 @@ class CoreView(View):
         """
 
         return {
-            'login_form': BSAuthenticationForm,
+            'login_form': BaseAuthenticationForm,
         }.copy()
     #base_data()
 
